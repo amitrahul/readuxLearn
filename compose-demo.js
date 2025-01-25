@@ -57,4 +57,41 @@ console.log(result);
 
 // ** Alternative : -
 // it store all the function : -
-const func = [removeSpace, repeatString, makeUpperCase, makeItallic];
+const funcArray = [removeSpace, repeatString, makeUpperCase, makeItallic];
+
+const updatedResult = funcArray.map((f) => f(str));
+console.log(updatedResult);
+/**
+ ** Here on original string we have performed all the opertaion.
+ it means on orignal string we have execute all the function one by one.
+ * [
+  'hellotherehowareyou?',
+  'hello there how are you ?hello there how are you ?',
+  'HELLO THERE HOW ARE YOU ?',
+  '<i>hello there how are you ?</i>'
+]
+
+** But we need to pass the result of one functions into another function.
+ */
+const functionStringArray = [
+  str,
+  removeSpace,
+  repeatString,
+  makeUpperCase,
+  makeItallic,
+];
+
+const result1 = functionStringArray.reduce(
+  (previousAnswer, currentFunction) => {
+    console.log(previousAnswer, currentFunction);
+    /**
+     * 
+        hello there how are you ? [Function: removeSpace]
+        hellotherehowareyou? [Function: repeatString]
+        hellotherehowareyou?hellotherehowareyou? [Function: makeUpperCase]
+        HELLOTHEREHOWAREYOU?HELLOTHEREHOWAREYOU? [Function: makeItallic]
+     */
+    return currentFunction(previousAnswer);
+  }
+);
+console.log(result1); // <i>HELLOTHEREHOWAREYOU?HELLOTHEREHOWAREYOU?</i>
