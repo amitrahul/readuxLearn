@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { createStore, bindActionCreators } from "redux";
 
 function demoReducer(state, action) {
   /**
@@ -77,9 +77,29 @@ const add_item = (name, quantity) => ({
  */
 store.subscribe(() => console.log("calling subscribe the store"));
 
+/**
+ * Here actions is an object.
+ * Instead of writing each and every time "store.dispatch", we can bind this function
+ * with action creators function (add_item).
+ */
+const actions = bindActionCreators({ add_item }, store.dispatch);
+
+console.log("actions", actions); // actions { add_item: [Function (anonymous)] }
+
+/**
+ * 
+ ====> insted of doing it
+
 store.dispatch(add_item("guava", 2));
 store.dispatch(add_item("butter", 12));
-
 store.dispatch({ type: "unknown" });
+ */
+
+// we can perform
+
+actions.add_item("milk", 3);
+console.log(store.getState());
+
+actions.add_item("cake", 7);
 
 console.log(store.getState());
