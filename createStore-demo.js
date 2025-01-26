@@ -64,7 +64,22 @@ const add_item = (name, quantity) => ({
   itemQuantity: (quantity && quantity) || 1,
 });
 
+/**
+ * * subscribe function will call the callback function, number of times state will change  or
+ * * number of times dispatch function is called, whether state change or not.
+ *
+ * disptach() function is responsible for update the state
+ *
+ * eg:-
+ * here subscribe function is calling three times beacuse dispatch is called three times.
+ * due to that state update two times and one time state will remain same.
+ *
+ */
+store.subscribe(() => console.log("calling subscribe the store"));
+
 store.dispatch(add_item("guava", 2));
 store.dispatch(add_item("butter", 12));
+
+store.dispatch({ type: "unknown" });
 
 console.log(store.getState());
